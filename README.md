@@ -1,1 +1,1 @@
-# please make sure to change the instance according to your django port 
+# please make sure to change the instance to correspond to your django server port
