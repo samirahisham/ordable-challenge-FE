@@ -21,14 +21,13 @@ const setCurrentUser = (token) => {
 export const login = (userData) => {
   return async (dispatch) => {
     try {
-      const response = await instance.post("/user/login/", userData);
+      const response = await instance.post("/user/login/", {
+        email: userData.email.toLowerCase(),
+        password: userData.password,
+      });
       dispatch(setCurrentUser(response.data.access));
     } catch (error) {
-      message.error(
-        error.response
-          ? error.response.data
-          : { error: ["invalid credentials"] }
-      );
+      message.error("an error has occured");
     }
   };
 };
