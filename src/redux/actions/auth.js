@@ -2,6 +2,7 @@ import { message } from "antd";
 import { SET_CURRENT_USER } from "./actionTypes";
 import instance from "./instance";
 import jwt_decode from "jwt-decode";
+import { setLoading } from "./loading";
 const setCurrentUser = (token) => {
   return async (dispatch) => {
     let user;

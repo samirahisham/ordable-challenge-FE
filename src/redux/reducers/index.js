@@ -3,10 +3,12 @@ import { combineReducers } from "redux";
 import authReducer from "./auth";
 import shopsReducer from "./shop";
 import driverReducer from "./driver";
+import loadingReducer from "./loading";
 
 const rootReducer = combineReducers({
   authReducer: authReducer,
   shopsReducer: shopsReducer,
+  loadingReducer: loadingReducer,
   driverReducer: driverReducer,
 });
 export default rootReducer;

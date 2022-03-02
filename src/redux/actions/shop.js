@@ -7,14 +7,20 @@ import {
   SET_SHOPS,
 } from "./actionTypes";
 import instance from "./instance";
+import { setLoading } from "./loading";
 
 export const getShops = () => {
   return async (dispatch) => {
     try {
+      dispatch(setLoading(true));
+
       const response = await instance.get("stores/");
 
       dispatch({ type: SET_SHOPS, payload: response.data });
+      dispatch(setLoading(false));
     } catch (err) {
+      dispatch(setLoading(false));
+
       message.error("an error has occured , please try again later");
     }
   };
@@ -23,6 +29,8 @@ export const getShops = () => {
 export const getShopOrders = (shopID, assigned) => {
   return async (dispatch) => {
     try {
+      dispatch(setLoading(true));
+
       let assignedParam = false;
       if (typeof assigned === "boolean") {
         assignedParam = assigned;
@@ -35,7 +43,10 @@ export const getShopOrders = (shopID, assigned) => {
       } else {
         dispatch({ type: SET_ORDERS, payload: response.data.results });
       }
+      dispatch(setLoading(false));
     } catch (err) {
+      dispatch(setLoading(false));
+
       message.error("an error has occured , please try again later");
     }
   };
@@ -44,10 +55,15 @@ export const getShopOrders = (shopID, assigned) => {
 export const getStoreDrivers = (shopID) => {
   return async (dispatch) => {
     try {
+      dispatch(setLoading(true));
+
       const response = await instance.get(`stores/${shopID}/drivers/`);
 
       dispatch({ type: SET_DRIVERS, payload: response.data });
+      dispatch(setLoading(false));
     } catch (err) {
+      dispatch(setLoading(false));
+
       message.error("an error has occured , please try again later");
     }
   };
@@ -56,11 +72,17 @@ export const getStoreDrivers = (shopID) => {
 export const assignDriver = (orderId, driver) => {
   return async (dispatch) => {
     try {
+      dispatch(setLoading(true));
+
       await instance.put(`stores/orders/${orderId}/assign/`, {
         employee_id: driver,
       });
+      dispatch(setLoading(false));
+
       window.location.reload();
     } catch (err) {
+      dispatch(setLoading(false));
+
       message.error("an error has occured , please try again later");
     }
   };

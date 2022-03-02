@@ -2,6 +2,7 @@ import { Button, Space, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import Loader from "../Components/Loader";
 
 import { getDriverOrders } from "../redux/actions";
 
@@ -40,6 +41,8 @@ const AssignedOrdersList = () => {
     },
   ];
 
+  const loading = useSelector((state) => state.loadingReducer.loading);
+  if (loading) return <Loader />;
   return (
     <div>
       {" "}

@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getShops } from "../redux/actions";
 import LoginPage from "./auth/LoginPage";
+import Loader from "./Loader";
 import ShopsList from "./ShopsList";
 const Home = () => {
   const user = useSelector((state) => state.authReducer.user);
@@ -11,7 +12,8 @@ const Home = () => {
   useEffect(() => {
     if (user) dispatch(getShops());
   }, [user]);
-
+  const loading = useSelector((state) => state.loadingReducer.loading);
+  if (loading && user) return <Loader />;
   return (
     <div>
       {user ? (
