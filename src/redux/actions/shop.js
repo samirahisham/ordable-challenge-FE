@@ -56,7 +56,7 @@ export const getStoreDrivers = (shopID) => {
 export const assignDriver = (orderId, driver) => {
   return async (dispatch) => {
     try {
-      const response = await instance.put(`stores/orders/${orderId}/assign/`, {
+      await instance.put(`stores/orders/${orderId}/assign/`, {
         employee_id: driver,
       });
       window.location.reload();
