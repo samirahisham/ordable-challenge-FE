@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
-function App() {
+import { Provider } from "react-redux";
+import store from "./redux";
+import Routes from "./Router";
+import { Layout } from "antd";
+import "antd/dist/antd.css";
+import { Content, Footer, Header } from "antd/lib/layout/layout";
+
+function App(props) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+        <Layout>
+          <Header></Header>
+          <Content style={{ minHeight: 900 }}>
+            <Routes />
+          </Content>
+          <Footer></Footer>
+        </Layout>
+      </Provider>
     </div>
   );
 }
